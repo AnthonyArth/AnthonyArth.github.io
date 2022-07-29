@@ -31,8 +31,8 @@ p {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     background: inherit;
 }
@@ -40,7 +40,7 @@ p {
 /*timeline event box*/
 .timeline ul li div
 {
-    width: 20vw;
+    width: 30vw;
     position: relative;
     bottom: 0;
     padding: 1.5rem;
@@ -57,11 +57,12 @@ p {
     width: 0;
     height: 0;
     border-style: solid;
+    z-index: 1;
 }
 
 /*move the odd timeline event boxes to the right*/
 .timeline ul li:nth-child(odd) div {
-    left: 5vw;
+    left: calc(20px + 5vw);
 }
 
 /*add the triangle to the odd boxes*/
@@ -71,9 +72,9 @@ p {
     border-color: transparent white transparent transparent;
 }
 
-/*move the odd timeline event boxes to the left*/
+/*move the even timeline event boxes to the left*/
 .timeline ul li:nth-child(even) div {
-    right: calc(90px + 40vw);
+    right: calc(90px + 32vw);
 }
 
 /*add the triangle to the even box*/
@@ -93,3 +94,33 @@ p {
 }
 
 /*media queries*/
+/*mobile*/
+@media screen and (max-width: 540px) 
+{
+    /*adjust the odd timeline event boxes*/
+    .timeline ul li:nth-child(odd) div {
+    left: 10vw;
+    }
+
+    /*move the even timeline event boxes to the right*/
+    .timeline ul li:nth-child(even) div {
+        left: 10vw;
+    }
+
+    /*add the triangle to the even box*/
+    .timeline ul li:nth-child(even) div::before {
+        left: -15px;
+        border-width: 8px 16px 8px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    .timeline ul li {
+        list-style: none;
+        position: relative;
+        width: 5px;
+        margin: 0 auto;
+        right: 50%;
+        padding-top: 5rem;
+        background: black;
+    }
+}
