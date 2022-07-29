@@ -37,6 +37,12 @@ p {
     background: inherit;
 }
 
+/*the last circle on the timeline*/
+.timeline ul li:last-of-type::after
+{
+    display: none;
+}
+
 /*timeline event box*/
 .timeline ul li div
 {
@@ -88,18 +94,77 @@ p {
 .timeline time
 {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 7px;
+}
+
+/*timeline animation segment*/
+#computer-timeline ul li::after {
+    transition: all 0.5s ease-in-out;
+}  
+
+ 
+/*this changes the node content..giving it a background of white and making the border thicker*/
+#computer-timeline ul li.slide-in::after {
+    background: white;
+    border: 3px solid orange;
+}
+
+/* Hide event card initially */
+#computer-timeline ul li div {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+  
+#computer-timeline ul li:nth-child(odd) div {
+    transform: translateX(20rem);
+}
+
+#computer-timeline ul li:nth-child(even) div {
+    transform: translateX(-20rem);
+}
+
+/* display the event card */
+#computer-timeline ul li.slide-in div {
+    transform: none;
+    visibility: visible;
+    opacity: 1;
 }
 
 /*media queries*/
 /*mobile*/
 @media screen and (max-width: 540px) 
 {
+    /*Change font size for p*/
+    p {
+        font-size: 1.1rem;
+    }
+
+    /*laptop-img height/width*/
+    #laptop-img
+    {
+        width: 90vw;
+    }
+
+    /*change the style of time tag in timeline class*/
+    .timeline time
+    {
+        display: block;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 7px;
+    }
+
+    /*timeline event box*/
+    .timeline ul li div
+    {
+        width: 50vw;
+    }
     /*adjust the odd timeline event boxes*/
     .timeline ul li:nth-child(odd) div {
-    left: 10vw;
+        left: 10vw;
     }
 
     /*move the even timeline event boxes to the right*/
@@ -122,5 +187,15 @@ p {
         right: 50%;
         padding-top: 5rem;
         background: black;
+    }
+
+    #computer-timeline ul li:nth-child(even) div {
+        transform: translateX(20rem);
+    }
+
+    #computer-timeline ul li.slide-in div {
+        transform: none;
+        visibility: visible;
+        opacity: 1;
     }
 }
