@@ -14,10 +14,6 @@ p {
     overflow: hidden;
 }
 
-.timeline ul{
-    padding: 5rem 0;
-}
-
 .timeline ul li {
     list-style: none;
     position: relative;
@@ -44,7 +40,7 @@ p {
 /*timeline event box*/
 .timeline ul li div
 {
-    width: 40vw;
+    width: 20vw;
     position: relative;
     bottom: 0;
     padding: 1.5rem;
@@ -95,3 +91,5 @@ p {
     font-weight: 600;
     margin-bottom: 7px;
 }
+
+/*media queries*/
