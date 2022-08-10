@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/quizPlay.css">
+    <script type="module" src="./js/quizPlay.js"></script>
+</head> 
+<body>
+    <nav>
+        <h1>All about computers</h1>
+        <a href="./index.html" class="button">Introduction</a>
+        <a href="./quiz.html" class="button current-page-button">Quiz</a>
+    </nav>
+
+    <div id="quiz-body" class="flexbox flex-center flex-column">
+        <h1>What is the answer?</h1>
+        <form class="flexbox flex-column">
+            
+            <button type="button" value="A" id="A" class="flexbox flex-row flex-center-vertical choice">
+                <div class="choice-letter flexbox flex-center">A</div>
+                <label for="A">Choice 1</label>
+            </button>
+
+            <button type="button" value="B" id="B" class="flexbox flex-row flex-center-vertical choice">
+                <div class="choice-letter flexbox flex-center">B</div>
+                <label for="B">Choice 2</label>
+            </button>
+
+            <button type="button" value="C" id="C" class="flexbox flex-row flex-center-vertical choice">
+                <div class="choice-letter flexbox flex-center">C</div>
+                <label for="C">Choice 3</label>
+            </button>
+
+            <button type="button" value="D" id="D" class="flexbox flex-row flex-center-vertical choice">
+                <div class="choice-letter flexbox flex-center">D</div>
+                <label for="D">Choice 4</label>
+            </button>
+        </form>
+
+    </div>
+</body>
+</html>
