@@ -1,4 +1,4 @@
-/*css for styling quizPlay.html*/
+/*css for styling quiz.html*/
 #quiz-body{
   justify-content: center;
   align-items: center;
@@ -6,14 +6,11 @@
 
 #quiz-body h1{
   flex-basis: 100%;
+  text-align: center;
 }
 
 #play-quiz{
   margin-bottom: 1em;
-}
-
-h1{
-  text-align: center;
 }
 
 .choice{
