@@ -1,0 +1,51 @@
+#section-nav{
+    flex-basis: 100%;
+    width: 100%;
+}
+
+#section-nav .button{
+    padding: auto;
+    width: auto;
+    height: auto;
+}
+
+#content{
+    flex-basis: 100%;
+}
+
+#component-body{
+ flex-direction: row;
+}
+
+p{
+    flex-basis: 40%;
+}
+
+.image{
+    margin-right: 20px;
+    flex-basis: 40%;
+    max-width: 40%;
+    width: auto;
+}
+
+.content-section{
+    height: 0;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    transform: translateY(5rem);
+}
+
+.content-section.slide-in{
+    margin-top: 10vh;
+    transform: none;
+    height: auto;
+    width: auto;
+    opacity: 1;
+}
+
+@media screen and (max-width: 540px) 
+{
+    #section-nav .button{
+        flex-basis: 100%;
+    }
+}

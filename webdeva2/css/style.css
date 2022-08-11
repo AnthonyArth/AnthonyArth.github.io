@@ -52,7 +52,7 @@ nav{
 }
 
 .button{
-    width: 6em;
+    width: 7em;
     background-color: white;
     padding: 1em 5em;
     text-align: center;
@@ -61,6 +61,7 @@ nav{
     font-size: 16px;
     color: black;
     transition:background-color 0.3s;
+    margin-right: 2px;
 }
 
 .button:hover{
@@ -72,12 +73,8 @@ a.button{
     text-decoration: none;
 }
 
-
-a.current-page-button{
+.selected-button{
     background-color: #0008FF;
-}
-
-a.current-page-button{
     color:white;
 }
 
@@ -85,22 +82,26 @@ a.current-page-button{
 @media screen and (max-width: 720px) 
 {
     *{
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     h1 {
-        font-size: 2.1rem;
+        font-size: 2rem;
+    }
+    nav a.button
+    {
+        flex-basis: 100%;
     }
 }
 /*mobile*/
 @media screen and (max-width: 540px) 
 {
     *{
-        font-size: 1.05rem;
+        font-size: 0.95rem;
     }
 
     h1 {
-        font-size: 2.05rem;
+        font-size: 1.95rem;
     }
 
     nav a.button

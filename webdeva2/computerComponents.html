@@ -4,16 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+    <title>Components Of Computer</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/computerComponents.css">
+    <script defer src="./js/computerComponents.js"></script>
 </head>
 <body>
-    <div id="nav-buttons" class="flexbox flex-row">
-        <a href="./index.html" class="button current-page-button">Introduction</a>
-        <a href="./computerComponents.html" class="button current-page-button">Components of Computer</a>
-        <a href="./quiz.html" class="button">Quiz</a>
-
-    </div>
+    <nav>
+        <h1>All about computers</h1>
+        <div id="nav-buttons" class="flexbox flex-row">
+            <a href="./index.html" class="button">Introduction</a>
+            <a href="./computerComponents.html" class="button selected-button">Components</a>
+            <a href="./quiz.html" class="button">Quiz</a>
+        </div>
+    </nav>
     
+   <div class="flexbox flex-center flex-row" id="component-body">
+        <div id="section-nav" class="flexbox flex-center flex-row">
+            <div class="button selected-button" id="cpu-nav">CPU</div>
+            <div class="button" id="gpu-nav">GPU</div>
+            <div class="button" id="motherboard-nav">Motherboard</div>
+        </div>
+        <div id="content">
+            <div id="cpu" class="flexbox flex-center flex-row content-section slide-in">
+                <img id="cpu-img" class="image" src="./images/cpu.jpg" alt="CPU">
+                <p>
+                    A central processing unit (CPU), also called a central processor, main processor or just processor, 
+                    is the electronic circuitry that executes instructions comprising a computer program. The CPU performs 
+                    basic arithmetic, logic, controlling, and input/output (I/O) operations specified by the instructions in the 
+                    program. This contrasts with external components such as main memory and I/O circuitry, and specialized processors 
+                    such as graphics processing units (GPUs).
+                </p>
+            </div>
+
+            <div id="gpu" class="flexbox flex-center flex-row content-section">
+                <img id="gpu-img" class="image" src="./images/gpu.jpg" alt="GPU">
+                <p>
+                    A graphics processing unit (GPU) is a specialized electronic circuit designed to manipulate and alter memory to 
+                    accelerate the creation of images in a frame buffer intended for output to a display device. GPUs are used in 
+                    embedded systems, mobile phones, personal computers, workstations, and game consoles. Modern GPUs are efficient 
+                    at manipulating computer graphics and image processing. Their parallel structure makes them more efficient than 
+                    general-purpose central processing units (CPUs) for algorithms that process large blocks of data in parallel. 
+                </p>
+            </div>
+
+            <div id="motherboard" class="flexbox flex-center flex-row content-section">
+                <img id="motherboard-img" class="image" src="./images/motherboard.jpg" alt="motherboard">
+                <p>
+                    A motherboard (also called mainboard, main circuit board, mb, mboard, backplane board, base board, system board, 
+                    logic board (only in Apple computers) or mobo) is the main printed circuit board (PCB) in general-purpose computers
+                    and other expandable systems. It holds and allows communication between many of the crucial electronic components of 
+                    a system, such as the central processing unit (CPU) and memory, and provides connectors for other peripherals.
+                </p>
+            </div>
+        </div>
+   </div>
 </body>
 </html>
