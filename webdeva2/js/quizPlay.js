@@ -173,12 +173,14 @@ let quizBody;
 let questions = new Array;
 let questionsToAsk = new Array;
 let currentQuestion;
+let questionNumber;
 let currentCookieName;
 
 function Init(){
     //init elements to put in variables
     quizBody = document.querySelector("#quiz-body");
 
+    //init the name of cookie
     let tempCookieArray = document.cookie.split(';');
     currentCookieName = "ans" + tempCookieArray.length;
 
@@ -194,6 +196,7 @@ function Init(){
 
 
     currentQuestion = questions[0];
+    questionNumber = 1;
     SetQuestion(currentQuestion);
 }
 
