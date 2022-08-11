@@ -7,6 +7,7 @@
 }
 
 .choice{
+  position:relative;
   padding:0;
   border:0;
   margin:0.5em;
@@ -15,11 +16,17 @@
   transition:background-color 0.3s;
 }
 
+.choice label{
+  flex-basis: 90%;
+  margin-left: auto;
+}
+
 .choice:hover{
   background-color: lightgreen;
 }
 
 .choice-number{
+  padding: 0;
   background-color: black;
   width: 8%;
   height: 100%;

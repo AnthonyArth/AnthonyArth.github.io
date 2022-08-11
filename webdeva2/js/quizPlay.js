@@ -56,6 +56,7 @@ function GetCookie(cookieName) {
 class CQuestion{
     #question;
     #answer;
+    #choices;
 
     constructor(){
         //throw an error as we want this class to be abstract
@@ -83,32 +84,24 @@ class CQuestion{
     }
 
     SetAnswer(answer){
-        //check if input is a string
-        if(typeof answer != "string")
+        //check if answer is an array
+        if(Array.isArray(answer) == false)
         {
-            throw new Error("You cannot input answer as a non string");  
+            //if not throw an error
+            throw new Error("Cannot input answer as a non array");
         }
         this.#answer = answer;
     }
-}
 
-class CMultipleChoiceQuestion extends CQuestion{
-    #choices;
-    #correctChoice;
-
-    constructor(question, answer, choices){
-        super();
-        this.SetQuestion(question);
-        this.SetAnswer(answer);
-
-        //check if choices is an object(which includes array)
-        if(typeof choices != "object")
+    SetChoices(choices)
+    {
+        //check if choices is an array
+        if(Array.isArray(choices) == false)
         {
             //if not throw an error
             throw new Error("Cannot input choices as a non array");
         }
 
-        this.#correctChoice = new Array;
         for(let i = 0; i < choices.length; ++i)
         {
             //check if choices is an array of strings
@@ -117,35 +110,11 @@ class CMultipleChoiceQuestion extends CQuestion{
                 //if not throw an error
                 throw new Error("choices cannot contain non string");
             }
-
-            //check if answer is in choices
-            if(answer.localeCompare(choices[i]))
-            {
-                this.#correctChoice.push(choices[i]);
-            }
         }
-
-        //if answer is not in choices
-        if(this.#correctChoice.length == 0)
-        {
-            //throw an error
-            throw new Error("answer is not in list of choices");
-        }
-
         this.#choices = [...choices];
     }
 
-    CheckWithCorrectChoice(input){
-        for(let i = 0; i < this.#correctChoice.length; ++i)
-        {
-            if(input.localeCompare(this.#correctChoice[i]))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    
     GetChoices()
     {
         return this.#choices
@@ -168,6 +137,48 @@ class CMultipleChoiceQuestion extends CQuestion{
     }
 }
 
+class CMultipleChoiceQuestion extends CQuestion{
+    constructor(question, answer, choices){
+        super();
+        this.SetQuestion(question);
+        this.SetAnswer(answer);
+
+        let correctChoice = new Array;
+        for(let i = 0; i < choices.length; ++i)
+        {
+            for(let x = 0; x < answer.length; ++x)
+            {
+                //check if answer is in choices
+                if(answer[x].localeCompare(choices[i]))
+                {
+                    correctChoice.push(choices[i]);
+                }
+            }
+        }
+
+        //if answer is not in choices
+        if(correctChoice.length == 0)
+        {
+            //throw an error
+            throw new Error("answer is not in list of choices");
+        }
+
+        this.SetChoices(choices);
+    }
+
+    CheckWithCorrectChoice(input){
+        //since this is not a checkbox question we just return true if the correct choice is found
+        for(let i = 0; i < this.GetAnswer().length; ++i)
+        {
+            if(input.localeCompare(this.GetAnswer()[i]))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 //implementation to quiz
 let quizBody;
 let questions = new Array;
@@ -175,10 +186,12 @@ let questionsToAsk = new Array;
 let currentQuestion;
 let questionNumber;
 let currentCookieName;
+let questionIndicator
 
 function Init(){
     //init elements to put in variables
     quizBody = document.querySelector("#quiz-body");
+    questionIndicator = document.querySelector("#question-indicator");
 
     //init the name of cookie
     let tempCookieArray = document.cookie.split(';');
@@ -186,14 +199,31 @@ function Init(){
 
     //add all questions to array
     questions.push(new CMultipleChoiceQuestion("What is a CPU?", //question
-    "A CPU is the electronic circuitry that executes instructions comprising a computer program.", //answer
+    ["A CPU is the electronic circuitry that executes instructions comprising a computer program."], //answer
     //choices
     ["A CPU is electronic circuitry that executes instructions comprising a computer program.",
     "A CPU is a processor that executes instructions from a computer.",
     "A CPU is Central Processing Unit.",
-    "A CPU is electronic circuitry that processes data to output results"]
+    "A CPU is electronic circuitry that processes data to output results."]
     ))
 
+    questions.push(new CMultipleChoiceQuestion("What is a GPU", //question
+    ["A GPU is a specialized electronic circuit designed to manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display device."], //answer
+    //choices
+    ["A GPU is a specialized electronic circuit designed to manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display device.",
+    "A GPU is a processor that generates images.",
+    "A GPU is Graphics Processing Unit.",
+    "A GPU is a specialized electronic circuit designed to manipulate and alter memory to create images in a frame buffer intended for output to a display device."]
+    ))
+
+    questions.push(new CMultipleChoiceQuestion("What was considered to be the first computer", //question
+    ["The babbage difference engine."], //answer
+    //choices
+    ["The babbage difference engine.",
+    "The abacus.",
+    "The universal turing machine.",
+    "The differential analyzer."]
+    ))
 
     currentQuestion = questions[0];
     questionNumber = 1;
@@ -205,6 +235,7 @@ function EndGame()
     quizBody.innerHTML = "";
     let node = document.createElement("h1");
     node.innerHTML = "Your Score: " + GetCookie(currentCookieName).split("=")[1];
+    quizBody.appendChild(node);
 }
 
 function SetQuestion()
@@ -216,6 +247,9 @@ function SetQuestion()
     }
     //Set what is asking the currentQuestion which will be a h1 in #quiz-body
     document.querySelector("#quiz-body h1").innerHTML = currentQuestion.GetQuestion();
+
+    //before creating the choices we shuffle them
+    currentQuestion.ShuffleChoices();
    
     let choiceNode;
     let node;
@@ -228,7 +262,7 @@ function SetQuestion()
         choiceNode.value = i;
         choiceNode.id = i;
         choiceNode.classList = "flexbox flex-row flex-center-vertical choice";
-        quizBody.appendChild(choiceNode);
+        quizBody.insertBefore(choiceNode, quizBody.children[i]);
 
         //append the choice number display
         node = document.createElement("div");
@@ -249,37 +283,49 @@ function SetQuestion()
             {
                 if(questionNumber > 1)
                 {
-                    document.cookie = GetCookie("ans" + currentCookieName) + " 0"
+                    document.cookie = GetCookie(currentCookieName) + ",0"
                 }
                 else
                 {
-                    SetCookie("ans" + currentCookieName, "0", 2);
+                    SetCookie(currentCookieName, "0", 2);
                 }
             }
             else
             {
                 if(questionNumber > 1)
                 {
-                    document.cookie = GetCookie(currentCookieName) + " 1"
+                    document.cookie = GetCookie(currentCookieName) + ",1"
                 }
                 else
                 {
-                    SetCookie("ans" + currentCookieName, "1", 2);
+                    SetCookie(currentCookieName, "1", 2);
                 }
             }
 
             ++questionNumber;
+            //if not after last question
             if(questionNumber <= questions.length)
             {
+                //delete buttons
+                let quizBodyInitialLength = quizBody.children.length;
+                for(let i = 0; i < quizBodyInitialLength - 2 ; ++i)
+                {
+                    quizBody.removeChild(quizBody.children[1]);
+                }
+
+                //go to the next question
                 currentQuestion = questions[questionNumber - 1];
                 SetQuestion(currentQuestion);
             }
             else
             {
+                //end the quizS
                 EndGame();
             }
         })
     }
+
+    document.querySelector("#question-indicator").innerHTML = questionNumber + "/" + questions.length;
 }
 
 document.addEventListener("DOMContentLoaded", Init);
