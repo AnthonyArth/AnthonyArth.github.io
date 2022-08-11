@@ -173,14 +173,14 @@ let quizBody;
 let questions = new Array;
 let questionsToAsk = new Array;
 let currentQuestion;
-let currentCookie;
+let currentCookieName;
 
 function Init(){
     //init elements to put in variables
     quizBody = document.querySelector("#quiz-body");
 
     let tempCookieArray = document.cookie.split(';');
-    currentCookie = tempCookieArray.length;
+    currentCookieName = "ans" + tempCookieArray.length;
 
     //add all questions to array
     questions.push(new CMultipleChoiceQuestion("What is a CPU?", //question
@@ -194,7 +194,14 @@ function Init(){
 
 
     currentQuestion = questions[0];
-    SetQuestion(currentQuestion, 1);
+    SetQuestion(currentQuestion);
+}
+
+function EndGame()
+{
+    quizBody.innerHTML = "";
+    let node = document.createElement("h1");
+    node.innerHTML = "Your Score: " + GetCookie(currentCookieName).split("=")[1];
 }
 
 function SetQuestion(question)
@@ -239,16 +246,33 @@ function SetQuestion(question)
             {
                 if(questionNumber > 1)
                 {
-                    //SetCookie("ans" + currentCooki );
+                    document.cookie = GetCookie("ans" + currentCookieName) + " 0"
                 }
                 else
                 {
-                    SetCookie("ans" + currentCookie, "0", 2);
+                    SetCookie("ans" + currentCookieName, "0", 2);
                 }
             }
             else
             {
-                SetCookie("ans" + currentCookie, "1", 2);
+                if(questionNumber > 1)
+                {
+                    document.cookie = GetCookie(currentCookieName) + " 1"
+                }
+                else
+                {
+                    SetCookie("ans" + currentCookieName, "1", 2);
+                }
+            }
+
+            ++questionNumber;
+            if(questionNumber <= 10)
+            {
+                SetQuestion(questions[questionNumber - 1]);
+            }
+            else
+            {
+                EndGame();
             }
         })
     }
