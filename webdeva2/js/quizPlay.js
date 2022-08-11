@@ -20,38 +20,6 @@ function Shuffle(array){
     }
 }
 
-//set values to a new cookie
-function SetCookie(name, value, expireDays) {
-    const date = new Date();
-    //set time as current time + the expireDays*time in a day
-    date.setTime(date.getTime() + (expireDays*24*60*60*1000));
-    let expires = "expires="+ date.toUTCString();
-    //create the cookie
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-//get value from a cookie
-function GetCookie(cookieName) {
-    let cookieToSearch = cookieName + "="; //create a string to search for out of cookieName
-    let decodedCookie = decodeURIComponent(document.cookie); //decode the cookie string to handle cookies with special characters
-    let cookieArray = decodedCookie.split(';'); //split all cookies into an array
-
-    //loop through the cookie array
-    for(let i = 0; i <cookieArray.length; i++) {
-      //find the cookie
-      let cookie = cookieArray[i];
-
-      while (cookie.charAt(0) == ' ') {
-        cookie = cookie.substring(1);
-      }
-
-      if (cookie.indexOf(cookieToSearch) == 0) {
-        return cookie.substring(cookieToSearch.length, cookie.length);
-      }
-    }
-    return "";
-  }
-
 //classes
 class CQuestion{
     #question;
@@ -185,7 +153,7 @@ let questions = new Array;
 let questionsToAsk = new Array;
 let currentQuestion;
 let questionNumber;
-let currentCookieName;
+let currentQuizNumber;
 let questionIndicator
 
 function Init(){
@@ -193,9 +161,8 @@ function Init(){
     quizBody = document.querySelector("#quiz-body");
     questionIndicator = document.querySelector("#question-indicator");
 
-    //init the name of cookie
-    let tempCookieArray = document.cookie.split(';');
-    currentCookieName = "ans" + tempCookieArray.length;
+    //init the name of the current quiz
+    currentQuizNumber = "ans" + localStorage.length;
 
     //add all questions to array
     questions.push(new CMultipleChoiceQuestion("What is a CPU?", //question
@@ -234,7 +201,7 @@ function EndGame()
 {
     quizBody.innerHTML = "";
     let node = document.createElement("h1");
-    node.innerHTML = "Your Score: " + GetCookie(currentCookieName).split("=")[1];
+    node.innerHTML = "Your Score: " + localStorage.getItem(currentQuizNumber);
     quizBody.appendChild(node);
 }
 
@@ -278,27 +245,27 @@ function SetQuestion()
 
         //add an event listener on the button
         choiceNode.addEventListener("click", ()=>{
-            //create a cookie based on answer
+            //store different values into local storage based on answer
             if(currentQuestion.CheckWithCorrectChoice(node.innerHTML) == false)
             {
                 if(questionNumber > 1)
                 {
-                    document.cookie = GetCookie(currentCookieName) + ",0"
+                    localStorage.setItem(currentQuizNumber, localStorage.getItem(currentQuizNumber) + ",0")
                 }
                 else
                 {
-                    SetCookie(currentCookieName, "0", 2);
+                    localStorage.setItem(currentQuizNumber, "0");
                 }
             }
             else
             {
                 if(questionNumber > 1)
                 {
-                    document.cookie = GetCookie(currentCookieName) + ",1"
+                    localStorage.setItem(currentQuizNumber, localStorage.getItem(currentQuizNumber) + ",1")
                 }
                 else
                 {
-                    SetCookie(currentCookieName, "1", 2);
+                    localStorage.setItem(currentQuizNumber, "0");
                 }
             }
 
