@@ -38,9 +38,25 @@ if(localStorage.length > 0)
 }
 else
 {
-    //create the a h1 that says NA at center of screen
-    temp = document.createElement("div");
-    temp.classList.add("align-center-screen");
+    //create the a h1 that says NA
+    temp = document.createElement("h1");
     temp.innerHTML = "NA";
     quizBody.appendChild(temp);
 }
+
+document.querySelector("#quiz-body .button").addEventListener("click", () => {
+    if(localStorage.length > 0)
+    {
+        let scoreBoxes = quizBody.querySelectorAll(".score-box");
+
+        //delete the scoreBoxes
+        for(let i = 0; i < scoreBoxes.length; ++i)
+        {
+            scoreBoxes[i].parentNode.removeChild(scoreBoxes[i]);
+        }
+        temp = document.createElement("h1");
+        temp.innerHTML = "NA";
+        quizBody.appendChild(temp);
+        localStorage.clear();
+    }
+});

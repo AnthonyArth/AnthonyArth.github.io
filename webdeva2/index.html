@@ -12,14 +12,18 @@
 <body>
     <nav>
         <h1>All about computers</h1>
-        <a href="./index.html" class="button current-page-button">Introduction</a>
-        <a href="./quiz.html" class="button">Quiz</a>
+        <div id="nav-buttons" class="flexbox flex-row">
+            <a href="./index.html" class="button current-page-button">Introduction</a>
+            <a href="./quiz.html" class="button">Quiz</a>
+        </div>
     </nav>
 
     <div id="computer-definition">
         <h1>What Is a Computer?</h1>
     
         <p>
+            For the purposes of this website we will be specifically
+            refering to electronic computers and not analog when we say computer.
             A computer is an electronic device for storing and 
             processing data,typically in binary form, according 
             to instructions given to it in a variable program.
@@ -33,18 +37,32 @@
         </p>
     </div>
     
-    <h1 id="computer-timeline-header">The history of computers</h1>
+    <h1 id="computer-timeline-header">The history of digital computers</h1>
     <div id="computer-timeline" class="timeline">
         <ul>
             <li>
                 <div>
-                    <time>Pre 1942</time>
+                    <time>Pre 1937</time>
                     <p>
-                        Before 1942 there were many attempts to
+                        Before 1937 there were many attempts to
                         make machines that process data. The earliest example of this
                         would be the abacus a tool used to help people perform calculations
                         .However these machines are not really computers as computers as being
-                        electronic and able to store data.
+                        electronic and able to store data. However, there was one concept machine. That 
+                        was never finished called the Babbage difference engine. It was designed and partially built during the 1820s 
+                        and ’30s by Charles Babbage. This design was considered to be the father of all computers.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <time>1937</time>
+                    <p>
+                        Bell Laboratories scientist George Stibitz uses relays to make an adder.
+                        Called the “Model K” Adder because he built it on his “Kitchen” table, this simple demonstration 
+                        circuit provides proof of concept for applying Boolean logic to the design of computers, resulting 
+                        in construction of the relay-based Model I Complex Calculator in 1939. That same year in Germany, 
+                        engineer Konrad Zuse built his Z2 computer, also using telephone company relays.
                     </p>
                 </div>
             </li>
@@ -52,7 +70,24 @@
                 <div>
                     <time>1942</time>
                     <p>
-                        In 1942 the first computer was made.
+                        In 1942 the first electronic was made. The computer was called the Atanasoff–Berry computer(ABC).
+                        It was built by physics Professor John Vincent Atanasoff and his graduate student, 
+                        Clifford Berry, in 1942 at Iowa State College, now known as Iowa State University.
+                        The ABC weighed over 700 pounds and used vacuum tubes. It had a rotating drum, 
+                        a little bigger than a paint can, that had small capacitors on it.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <time>1941</time>
+                    <p>
+                        In 1941 Konrad Zuse finishes the Z3 computer.
+                        The Z3, an early computer built by German engineer Konrad Zuse working in complete isolation from 
+                        developments elsewhere, uses 2,300 relays, performs floating point binary arithmetic, and has a 22-bit 
+                        word length. The Z3 was used for aerodynamic calculations but was destroyed in a bombing raid on Berlin 
+                        in late 1943. Zuse later supervised a reconstruction of the Z3 in the 1960s, which is currently on display 
+                        at the Deutsches Museum in Munich.
                     </p>
                 </div>
             </li>

@@ -206,10 +206,10 @@ function Init(){
     ));
 
     questions.push(new CMultipleChoiceQuestion("What was considered to be the first computer?", //question
-    ["The babbage difference engine."], //answer
+    ["The Atanasoff–Berry computer."], //answer
     //choices
     ["The babbage difference engine.",
-    "The abacus.",
+    "The Atanasoff–Berry computer.",
     "The universal turing machine.",
     "The differential analyzer."]
     ));
@@ -219,6 +219,15 @@ function Init(){
     //choices
     ["True",
     "False"]
+    ));
+
+    questions.push(new CMultipleChoiceQuestion("Which of the following is not a component of a modern computer.", //question
+    ["Mouse"], //answer
+    //choices
+    ["Power Supply",
+    "Motherboard",
+    "Fans",
+    "Mouse"]
     ));
 
     //delete the current quiz storage used if quit abruptly
