@@ -1,4 +1,3 @@
-<!--Quiz main page-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/quiz.css">
-</head>
+    <link rel="stylesheet" href="./css/quizPlay.css">
+    <script src="./js/quizPlay.js"></script>
+</head> 
 <body>
     <nav>
         <h1>All about computers</h1>
@@ -16,15 +16,16 @@
             <a href="./index.html" class="button">Introduction</a>
             <a href="./computerComponents.html" class="button">Components</a>
             <a href="./quiz.html" class="button selected-button">Quiz</a>
-         </div>
+        </div>
     </nav>
 
-    <div class="flexbox flex-center flex-column" id="quiz-body">
-        <h1>Quiz</h1>
-        <!--Play the quiz-->
-        <a href="./quizPlay.html" class="button">Play Quiz</a>
-        <!--See the scores-->
-        <a href="./quizScores.html" class="button">Quiz Scores</a>
+    <div id="quiz-body" class="flexbox flex-center flex-column">
+            <h1>Quiz</h1>
+            <!--Play the quiz-->
+            <div class="button" id="play-quiz">Play Quiz</div>
+            <!--See the scores-->
+            <a href="./quizScores.html" class="button">Quiz Scores</a>
+            <h1 id="question-indicator"></h1>
     </div>
 </body>
 </html>

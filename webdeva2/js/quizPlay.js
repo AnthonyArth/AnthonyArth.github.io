@@ -178,7 +178,7 @@ let questionNumber;
 let currentQuizNumber;
 let questionIndicator;
 
-function Init(){
+function InitQuiz(){
     //init elements to put in variables
     quizBody = document.querySelector("#quiz-body");
     questionIndicator = document.querySelector("#question-indicator");
@@ -256,10 +256,8 @@ function EndGame()
     quizBody.innerHTML = "<p>Press enter to submit name</p><form id='form'><input id='name' type='text'></input></form>";
 
     document.querySelector("#form").addEventListener("submit", (f) => {
-        f.preventDefault(); //prevent default behaviour of submit event
         window.removeEventListener("unload", RemoveLocal)
         localStorage.setItem(currentQuizNumber, localStorage.getItem(currentQuizNumber) + "," + document.querySelector("#name").value)
-        window.location.href = "./quiz.html";
     });
 
     //create the score indicator
@@ -416,6 +414,11 @@ function SetQuestion()
     }
 
     document.querySelector("#question-indicator").innerHTML = questionNumber + "/" + questions.length;
+}
+
+function Init()
+{
+    document.querySelector("#play-quiz").addEventListener("click", InitQuiz);
 }
 
 //run init on DOMContentLoaded
