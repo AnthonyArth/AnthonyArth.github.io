@@ -120,11 +120,18 @@
     opacity: 1;
 }
 
+/*laptop-img height/width*/
+#laptop-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70vw;
+}
+
 /*media queries*/
 @media screen and (max-width: 720px)
 {
-    #laptop-img
-    {
+    #laptop-img{
         width: 90vw;
     }
 }
@@ -132,11 +139,6 @@
 /*mobile*/
 @media screen and (max-width: 540px) 
 {
-    /*Change font size for p*/
-    p {
-        font-size: 1.1rem;
-    }
-
     /*change the style of time tag in timeline class*/
     .timeline time
     {

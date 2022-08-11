@@ -1,0 +1,41 @@
+/*css for styling quizPlay.html*/
+#quiz-body{
+  justify-content: center;
+  align-items: center;
+} 
+
+#quiz-body h1{
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.align-center-screen{
+  height: 100vh;
+}
+
+.score-box{
+  background-color: white;
+  flex-wrap: nowrap;
+  position:relative;
+  padding:0;
+  margin-left:0.5em;
+  margin-bottom: 2px;
+  flex-basis: 100%;
+  width: 90%;
+  transition:background-color 0.3s;
+}
+
+.score-box-number{
+  background-color: black;
+  width: 8%;
+  width: 8%;
+  min-width: 8%;
+  align-self: stretch;
+  color: white;
+  margin: 0;
+  margin-right: 0.5em;
+}
+
+.score-box-content{
+  text-align: left;
+}

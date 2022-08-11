@@ -1,12 +1,18 @@
 /*Flexbox section*/
 .flexbox{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .flex-center{
     justify-content: center;
     align-items: center;
 }
+
+.flex-space-evenly{
+    justify-content:space-evenly;
+}
+
 .flex-center-vertical
 {
     align-items: center;
@@ -24,7 +30,7 @@
 *
 {
     box-sizing: content-box;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 body {
@@ -71,10 +77,27 @@ a.current-page-button{
     color:white;
 }
 
-/*laptop-img height/width*/
-#laptop-img {
-    display: block;
-  margin-left: auto;
-  margin-right: auto;
-    width: 70vw;
+/*tablet*/
+@media screen and (max-width: 720px) 
+{
+    *{
+        font-size: 1.1rem;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+}
+/*mobile*/
+@media screen and (max-width: 540px) 
+{
+    *{
+        font-size: 1.05rem;
+    }
+
+    h1 {
+        font-size: 2.05rem;
+    }
+
+
 }
