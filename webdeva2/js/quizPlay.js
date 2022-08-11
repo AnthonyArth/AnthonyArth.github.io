@@ -207,15 +207,15 @@ function EndGame()
     node.innerHTML = "Your Score: " + GetCookie(currentCookieName).split("=")[1];
 }
 
-function SetQuestion(question)
+function SetQuestion()
 {
-    let choices = question.GetChoices();
-    if(!(question instanceof CQuestion))
+    let choices = currentQuestion.GetChoices();
+    if(!(currentQuestion instanceof CQuestion))
     {
-        throw new Error("Cannot set question with non CQuestion")
+        throw new Error("Cannot set currentQuestion with non CQuestion")
     }
-    //Set what is asking the question which will be a h1 in #quiz-body
-    document.querySelector("#quiz-body h1").innerHTML = question.GetQuestion();
+    //Set what is asking the currentQuestion which will be a h1 in #quiz-body
+    document.querySelector("#quiz-body h1").innerHTML = currentQuestion.GetQuestion();
    
     let choiceNode;
     let node;
@@ -269,7 +269,7 @@ function SetQuestion(question)
             }
 
             ++questionNumber;
-            if(questionNumber <= 10)
+            if(questionNumber <= questions.length)
             {
                 currentQuestion = questions[questionNumber - 1];
                 SetQuestion(currentQuestion);
