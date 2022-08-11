@@ -242,7 +242,7 @@ function SetQuestion(question)
         //add an event listener on the button
         choiceNode.addEventListener("click", ()=>{
             //create a cookie based on answer
-            if(CheckWithCorrectChoice(node.innerHTML) == false)
+            if(currentQuestion.CheckWithCorrectChoice(node.innerHTML) == false)
             {
                 if(questionNumber > 1)
                 {
@@ -268,7 +268,8 @@ function SetQuestion(question)
             ++questionNumber;
             if(questionNumber <= 10)
             {
-                SetQuestion(questions[questionNumber - 1]);
+                currentQuestion = questions[questionNumber - 1];
+                SetQuestion(currentQuestion);
             }
             else
             {
